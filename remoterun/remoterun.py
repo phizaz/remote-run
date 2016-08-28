@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-__version__ = '0.2'
+__version__ = '0.4'
 
 def run_local(command, conf):
     from . import utils
@@ -22,7 +22,6 @@ def run_remote(command, conf):
     ]
     code = utils.run_command_attach_output(' '.join(_command), shell=True)
     return code
-
 
 def run():
     from . import utils
