@@ -1,0 +1,10 @@
+host: user@host
+remote_path: /remote/path/without/trailing/slash
+
+steps:
+  - name: sync to the remote
+    command: [rsync, -a, --exclude-from=.remoterunignore, ./, "{host}:{remote_path}"]
+  - name: test echo on the remote
+    remote: [echo, test]
+  - name: sync back from the remote
+    command: [rsync, -a, --exclude-from=.remoterunignore, "{host}:{remote_path}/", ./]
