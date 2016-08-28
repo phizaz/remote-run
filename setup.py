@@ -21,7 +21,7 @@ setup(
         'pyyaml'
     ],
     entry_points={
-        "console_scripts": ['remoterun = remoterun:remoterun']
+        "console_scripts": ['remoterun = remoterun.remoterun:main']
     },
     version = version,
     description = 'Running your script on a remote machine as if it were on your local one',

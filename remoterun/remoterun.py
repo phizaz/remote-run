@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-__version__ = '0.1'
+__version__ = '0.2'
 
 def run_local(command, conf):
     from . import utils
@@ -55,7 +55,7 @@ def run():
     if current_step not in all_steps:
         raise Exception('step {} not found in the .remoterunrc'.format(current_step))
 
-    print('remote run start running at step {}'.format(current_step))
+    print('RemoteRun start running at step {}'.format(current_step))
 
     start = False
     for i, step in enumerate(conf['steps'], 1):
@@ -75,7 +75,7 @@ def run():
 
     utils.delete_lockfile()
 
-    print('remote run finished!')
+    print('RemoteRun finished!')
 
 def init():
     from shutil import copy
@@ -85,4 +85,13 @@ def init():
     print('creating initial ignore file .remoterunignore')
     copy(utils.path_default_ignorefile(), utils.path_ignorefile())
 
-
+def main():
+    import argparse
+    parser = argparse.ArgumentParser('RemoteRun (v. {})'.format(__version__))
+    parser.add_argument('--init', default=False, action='store_true',
+                        help='init the required files in the current directory')
+    args = parser.parse_args()
+    if args.init:
+        init()
+    else:
+        run()

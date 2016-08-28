@@ -2,3 +2,5 @@
 .remoterun_lock
 .remoterunrc
 .git
+.gitignore
+.DS_Store
