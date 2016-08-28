@@ -2,9 +2,9 @@
 
 Running your script on a remote machine as if it were on your local one.
 
-*By syncing your files on the local machine to the remote one.*
+*By syncing your files on the local machine to the remote and executing from there.*
 
-**RemoteRun** also provide the ability to **continue** from your last step, that means if you quit during the process you can do RemoteRun and continue from where you left!
+**RemoteRun** also provides the ability to **continue** from your last step, that means if you quit during the process you can do RemoteRun and continue from where you left!
 
 # Installation
 
