@@ -1,5 +1,9 @@
+from __future__ import print_function
+
+__version__ = '0.1'
+
 def run_local(command, conf):
-    from remoterun import utils
+    from . import utils
     _command = list(map(lambda x: x.format(**utils.inject_vals(conf)), command))
     print('exec: "{}"'.format(' '.join(_command)))
     code = utils.run_command_attach_output(_command)
@@ -7,7 +11,7 @@ def run_local(command, conf):
 
 
 def run_remote(command, conf):
-    from remoterun import utils
+    from . import utils
     serialized_command = ' '.join(command).format(**utils.inject_vals(conf))
     print('remote exec: "{}"'.format(serialized_command))
     _command = [
@@ -21,7 +25,7 @@ def run_remote(command, conf):
 
 
 def run():
-    from remoterun import utils
+    from . import utils
     conf = utils.load_config()
     if conf is None:
         raise Exception('no config found, .remoterunrc might not be created')
@@ -73,6 +77,12 @@ def run():
 
     print('remote run finished!')
 
+def init():
+    from shutil import copy
+    from . import utils
+    print('creating initial config file .remoterunrc')
+    copy(utils.path_default_config(), utils.path_config())
+    print('creating initial ignore file .remoterunignore')
+    copy(utils.path_default_ignorefile(), utils.path_ignorefile())
 
-if __name__ == '__main__':
-    run()
+

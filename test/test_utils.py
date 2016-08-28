@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from remoterun import utils
 import unittest
 

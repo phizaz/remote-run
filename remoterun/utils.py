@@ -23,7 +23,7 @@ def path_ignorefile():
     return join(caller_dir(), '.remoterunignore')
 
 
-def path_default_ignore():
+def path_default_ignorefile():
     from os.path import join
     return join(source_dir(), '.remoterunignore')
 

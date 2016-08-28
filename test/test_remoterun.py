@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import unittest
 
 from remoterun.remoterun import *
@@ -19,6 +21,7 @@ class RemoteRunTest(unittest.TestCase):
         run()
 
     def test_format(self):
-        l = [1,2,3]
+        l = [1, 2, 3]
         s = '{l[0]}'.format(l=l)
         print(s)
+
