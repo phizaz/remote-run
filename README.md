@@ -21,11 +21,11 @@ cd /your/project/path
 remoterun --init
 ```
 
-This will initiate your `.remoterunrc` configuration file, and `.remoterunignore` igonre file (listing all the files that will not be transfered to the remote host). 
+This will initiate your `.remoterunrc` configuration file, and `.remoterunignore` ignore file (listing all the files that will not be transfered to the remote host). 
 
-They should initially look like this
+They should initially look like this:
 
-For `.remtoerunrc` (YAML style) which will give you a good head-start. Note the `command` section will run a command in your local machine, and ofcourse `remote` will run a command on your remote machine.
+For `.remtoerunrc` (YAML style) which will give you a good head-start. Note the `command` section will run a command in your local machine, and of course `remote` will run a command on your remote machine.
 
 ```
 host: user@host
