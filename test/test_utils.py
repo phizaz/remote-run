@@ -31,6 +31,9 @@ class UtilsTest(unittest.TestCase):
         r = utils.load_lockfile()
         self.assertEqual(r, 'aoeu')
 
+        if exists(utils.path_lockfile()):
+            remove(utils.path_lockfile())
+
     def test_load_config(self):
         r = utils.load_config()
         print(r)
@@ -38,7 +41,7 @@ class UtilsTest(unittest.TestCase):
     def test_load_ignore(self):
         r = utils.load_ignore()
         print(r)
-        self.assertListEqual(r, ['.remoterunignore', '.remoterunrc'])
+        self.assertListEqual(r, ['.remoterunignore', '.remoterun_lock', '.remoterunrc'])
 
     def test_run_command(self):
         r = utils.run_command_attach_output(['echo', 'test'])
@@ -46,14 +49,11 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(r, 0)
 
     def test_run_command_with_terminal(self):
-        r = utils.run_command_with_terminal([
-            'ssh', '-t', 'ta@192.168.1.45'
-        ])
-        print(r)
+        raise NotImplementedError
 
 
     def test_inject_vals(self):
-        r = utils.inject_vals(dict(a=10, b=20))
+        r = utils.injecting_vals(dict(a=10, b=20), [1,2])
         print(r)
         self.assertTrue('a' in r)
         self.assertTrue('b' in r)

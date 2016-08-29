@@ -2,17 +2,17 @@ from __future__ import print_function
 
 __version__ = '0.4'
 
-def run_local(command, conf):
+def run_local(command, conf, arg):
     from . import utils
-    _command = list(map(lambda x: x.format(**utils.inject_vals(conf)), command))
+    _command = list(map(lambda x: x.format(**utils.injecting_vals(conf, arg)), command))
     print('exec: "{}"'.format(' '.join(_command)))
     code = utils.run_command_attach_output(_command)
     return code
 
 
-def run_remote(command, conf):
+def run_remote(command, conf, arg):
     from . import utils
-    serialized_command = ' '.join(command).format(**utils.inject_vals(conf))
+    serialized_command = ' '.join(command).format(**utils.injecting_vals(conf, arg))
     print('remote exec: "{}"'.format(serialized_command))
     _command = [
         'ssh', '-T', conf['host'], '"cd {remote_path} && {command}"'.format(
@@ -23,7 +23,7 @@ def run_remote(command, conf):
     code = utils.run_command_attach_output(' '.join(_command), shell=True)
     return code
 
-def run():
+def run(arg):
     from . import utils
     conf = utils.load_config()
     if conf is None:
@@ -67,10 +67,10 @@ def run():
         utils.save_lockfile(step['name'])
         if 'command' in step:
             print('({}/{}) running "{}"'.format(i, len(conf['steps']), step['name']))
-            run_local(step['command'], conf)
+            run_local(step['command'], conf, arg)
         elif 'remote' in step:
             print('({}/{}) remote running "{}"'.format(i, len(conf['steps']), step['name']))
-            run_remote(step['remote'], conf)
+            run_remote(step['remote'], conf, arg)
 
     utils.delete_lockfile()
 
@@ -87,10 +87,11 @@ def init():
 def main():
     import argparse
     parser = argparse.ArgumentParser('RemoteRun (v. {})'.format(__version__))
+    parser.add_argument('arg', nargs='*', help='arguments passed to the .remoterunrc file, using by {arg[x]}')
     parser.add_argument('--init', default=False, action='store_true',
                         help='init the required files in the current directory')
     args = parser.parse_args()
     if args.init:
         init()
     else:
-        run()
+        run(args.arg)

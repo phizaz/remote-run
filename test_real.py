@@ -38,9 +38,10 @@ class RemoteRunRealTest(unittest.TestCase):
         copy('test/.remoterunrc', utils.path_config())
 
         utils.run_command_attach_output([
-            sys.executable, '-m', 'remoterun'
+            sys.executable, '-m', 'remoterun', 'hello world!'
         ])
 
         from os import remove
         remove('.remoterunignore')
         remove('.remoterunrc')
+

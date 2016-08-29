@@ -82,9 +82,8 @@ def merge_dict(d1, d2):
     return d
 
 
-def inject_vals(conf):
-    from sys import argv
-    return merge_dict(conf, {'arg': argv})
+def injecting_vals(conf, arg):
+    return merge_dict(conf, {'arg': arg})
 
 
 def run_command_attach_output(command, shell=False):
