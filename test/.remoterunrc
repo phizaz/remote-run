@@ -3,7 +3,7 @@ remote_path: '~/Projects/test-remoterun'
 
 steps:
   - name: sync to the remote
-    command: [rsync, -a, --exclude-from=.remoterunignore, ./, "{host}:{remote_path}"]
+    command: [rsync, -a, --delete, --exclude-from=.remoterunignore, ./, "{host}:{remote_path}"]
   - name: test docker
     remote: [docker, run, --rm, 'debian:jessie', echo, '{arg[0]}']
   - name: sync back from the remote

@@ -1,6 +1,6 @@
 from __future__ import print_function
 
-__version__ = '0.4'
+__version__ = '0.5'
 
 def run_local(command, conf, arg):
     from . import utils
