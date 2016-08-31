@@ -7,4 +7,4 @@ steps:
   - name: test echo on the remote
     remote: [echo, test]
   - name: sync back from the remote
-    command: [rsync, -a, --exclude-from=.remoterunignore, "{host}:{remote_path}/", ./]
+    command: [rsync, -au, --exclude-from=.remoterunignore, "{host}:{remote_path}/", ./]
